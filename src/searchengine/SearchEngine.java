@@ -6,7 +6,7 @@ package searchengine;
  */
 public class SearchEngine {
 
-    private static IndexTable indexTable = new IndexTable();
+    final private static IndexTable indexTable = new IndexTable();
 
     /**
      * @param args the command line arguments
@@ -20,18 +20,22 @@ public class SearchEngine {
 
         Website[] websites = new Website[html.length];
 
-        // create a website object out of html text
+        // index table retrieves keywords and positions of each word from each 
+        // page and adds that info as columns in the table
         for (int i = 0; i < html.length; i++) {
+            // create a website object out of html text
             websites[i] = new Website(i + 1, html[i]);
+
+            // add website objects to an index table
+            indexTable.addWebsite(websites[i]);
         }
 
-        // add website objects to an index table
-        indexTable.addWebsite(websites[0]);
+        System.out.println(
+                indexTable
+        );
 
-        // index table retrieves keywords and positions of each word and adds
-        //      that info as columns in the table
         // target: a searchable table of keywords that contains the page the
-        // word appears on as well as the position on the page
+        //      word appears on as well as the position on the page
     }
 
 }

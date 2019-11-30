@@ -17,4 +17,8 @@ public class Website {
     public String[] getKeywords() {
         return this.content.split(" ");
     }
+
+    public int getId() {
+        return id;
+    }
 }
