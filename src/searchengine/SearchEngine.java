@@ -30,12 +30,6 @@ public class SearchEngine {
             indexTable.addWebsite(websites[i]);
         }
 
-        System.out.println(
-                indexTable
-        );
-
-        // target: a searchable table of keywords that contains the page the
-        //      word appears on as well as the position on the page
     }
 
 }
