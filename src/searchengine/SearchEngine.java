@@ -1,6 +1,5 @@
 package searchengine;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -45,7 +44,16 @@ public class SearchEngine {
 
         String[] splitInput = userInput.split(" ");
 
-        System.out.println(Arrays.toString(indexTable.search(splitInput[0])));
+        // search every word user enters individually
+        for (String splitInput1 : splitInput) {
+            String[] response = indexTable.search(splitInput1);
+        
+            // print search results to screen
+            for (String response1 : response) {
+                System.out.print(response1 + " ");
+            }
+            System.out.println();
+        }
 
     }
 
