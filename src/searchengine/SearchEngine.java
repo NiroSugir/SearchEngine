@@ -1,5 +1,7 @@
 package searchengine;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Niro
@@ -8,11 +10,7 @@ public class SearchEngine {
 
     final private static IndexTable indexTable = new IndexTable();
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
+    public static void generateIndexTable() {
         String[] html = {
             "In this course we will learn the Java programming language",
             "In this program we learned Java and other programming languages"
@@ -29,7 +27,25 @@ public class SearchEngine {
             // add website objects to an index table
             indexTable.addWebsite(websites[i]);
         }
+    }
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // create a searchable table
+        generateIndexTable();
+
+        // prompt user for search keyword
+        System.out.print("Search: ");
+        String userInput = sc.nextLine();
+
+        String[] splitInput = userInput.split(" ");
+
+        
+        
     }
 
 }
