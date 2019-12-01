@@ -1,5 +1,6 @@
 package searchengine;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -44,8 +45,8 @@ public class SearchEngine {
 
         String[] splitInput = userInput.split(" ");
 
-        
-        
+        System.out.println(Arrays.toString(indexTable.search(splitInput[0])));
+
     }
 
 }
