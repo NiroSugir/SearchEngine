@@ -1,5 +1,6 @@
 package searchengine;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -38,23 +39,32 @@ public class SearchEngine {
         // create a searchable table
         generateIndexTable();
 
-        // prompt user for search keyword
+        // prompt user for keywordSearch keyword
         System.out.print("Search: ");
         String userInput = sc.nextLine();
 
+        // FIXME: determine which search strategy?? to use depending on what 
+        // the user enters (eg: keyword search or phrase search)
         String[] splitInput = userInput.split(" ");
 
-        // search every word user enters individually
+        // keywordSearch every word user enters individually
         for (String splitInput1 : splitInput) {
-            String[] response = indexTable.search(splitInput1);
-        
-            // print search results to screen
+            String[] response = indexTable.keywordSearch(splitInput1);
+
+            // print keywordSearch results to screen
             for (String response1 : response) {
                 System.out.print(response1 + " ");
             }
             System.out.println();
         }
 
+        System.out.println("---- phrase search ------");
+        int[][] phraseSearchResult = indexTable.phraseSearch(userInput);
+        // sort results based on nearness
+        for (int i = 0; i < phraseSearchResult.length; i++) {
+
+            System.out.println(Arrays.toString(phraseSearchResult[i]));
+        }
     }
 
 }
