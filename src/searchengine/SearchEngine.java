@@ -14,7 +14,8 @@ public class SearchEngine {
     public static void generateIndexTable() {
         String[] html = {
             "In this course we will learn the Java programming language",
-            "In this program we learned Java and other programming languages"
+            "In this program we learned Java and other programming languages",
+            "Coffee has a lot of nicknames java joe dirt mud brew cuppa daily grind lifeblood tar rocket fuel even worm dirt But have you ever considered why coffee is called java"
         };
 
         Website[] websites = new Website[html.length];
@@ -30,6 +31,29 @@ public class SearchEngine {
         }
     }
 
+    private static int[][] sortResultsByNearness(int[][] phraseSearchResults) {
+        int[][] sortedResults = phraseSearchResults.clone();
+
+        for (int i = 0; i < sortedResults.length - 1; i++) {
+            int minimumNearnessIndex = i;
+            int minimumNearness = sortedResults[minimumNearnessIndex][1];
+
+            for (int j = i; j < sortedResults.length; j++) {
+                if (sortedResults[j][1] < minimumNearness) {
+                    minimumNearness = sortedResults[j][1];
+                    minimumNearnessIndex = j;
+                }
+            }
+
+            // swap nearest to the front
+            int[] t = sortedResults[i].clone();
+            sortedResults[i] = sortedResults[minimumNearnessIndex].clone();
+            sortedResults[minimumNearnessIndex] = t.clone();
+        }
+
+        return sortedResults;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -43,27 +67,13 @@ public class SearchEngine {
         System.out.print("Search: ");
         String userInput = sc.nextLine();
 
-        // FIXME: determine which search strategy?? to use depending on what 
-        // the user enters (eg: keyword search or phrase search)
         String[] splitInput = userInput.split(" ");
 
-        // keywordSearch every word user enters individually
-        for (String splitInput1 : splitInput) {
-            String[] response = indexTable.keywordSearch(splitInput1);
-
-            // print keywordSearch results to screen
-            for (String response1 : response) {
-                System.out.print(response1 + " ");
-            }
-            System.out.println();
-        }
-
-        System.out.println("---- phrase search ------");
         int[][] phraseSearchResult = indexTable.phraseSearch(userInput);
-        // sort results based on nearness
-        for (int i = 0; i < phraseSearchResult.length; i++) {
+        int[][] sortedResults = sortResultsByNearness(phraseSearchResult);
 
-            System.out.println(Arrays.toString(phraseSearchResult[i]));
+        for (int i = 0; i < sortedResults.length; i++) {
+            System.out.format("Page %d%n", sortedResults[i][0]);
         }
     }
 
