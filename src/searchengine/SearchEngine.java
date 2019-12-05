@@ -1,6 +1,5 @@
 package searchengine;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -9,13 +8,12 @@ import java.util.Scanner;
  */
 public class SearchEngine {
 
-    final private static IndexTable indexTable = new IndexTable();
+    private static IndexTable indexTable = new IndexTable();
 
     public static void generateIndexTable() {
         String[] html = {
-            "In this course we will learn the Java programming language",
-            "In this program we learned Java and other programming languages",
-            "Coffee has a lot of nicknames java joe dirt mud brew cuppa daily grind lifeblood tar rocket fuel even worm dirt But have you ever considered why coffee is called java"
+            "<title>Java Course</title>\nIn this course we will learn the Java programming language",
+            "<title>Program Description</title>\nIn this program we learned Java and other programming languages"
         };
 
         Website[] websites = new Website[html.length];
@@ -66,8 +64,6 @@ public class SearchEngine {
         // prompt user for keywordSearch keyword
         System.out.print("Search: ");
         String userInput = sc.nextLine();
-
-        String[] splitInput = userInput.split(" ");
 
         int[][] phraseSearchResult = indexTable.phraseSearch(userInput);
         int[][] sortedResults = sortResultsByNearness(phraseSearchResult);

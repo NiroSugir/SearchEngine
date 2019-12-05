@@ -30,3 +30,13 @@ src/tests/antunit/core/output
 /log.xml
 lib/optional/license.txt
 /release/distrib/
+
+
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
